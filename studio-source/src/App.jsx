@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {ArrowRightIcon,ArrowDownIcon, PlayIcon, PlusIcon, MinusIcon, ResetIcon, Cross2Icon} from '@radix-ui/react-icons';
 import {ScrollAssay} from './ScrollAssay.jsx';
+import {Applications} from './Applications.jsx';
 const components=[['all','Whole bundle'],['peptide','Peptide helices'],['guanosine','Guanosine caps'],['linker','PEG2 linkers'],['histidines','Histidines'],['heme','Heme + Fe']];
 export function App(){
  const viewport=useRef(null),engine=useRef(null),records=useRef(null),video=useRef(null),hero=useRef(null);
@@ -11,6 +12,11 @@ export function App(){
  const [motionOff,setMotionOff]=useState(()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches);
  const reduced=()=>document.documentElement.dataset.motion==='reduced'||window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  useEffect(()=>{document.documentElement.dataset.motion=motionOff?'reduced':'normal';},[motionOff]);
+ useEffect(()=>{
+  const header=document.querySelector('.site-header');
+  const measure=()=>document.documentElement.style.setProperty('--header-height',header.getBoundingClientRect().height+'px');
+  measure();const observer=new ResizeObserver(measure);observer.observe(header);return()=>observer.disconnect();
+ },[]);
  const scroll=id=>document.getElementById(id)?.scrollIntoView({behavior:reduced()?'instant':'smooth',block:'start'});
  function inspect(){setInspecting(true);setTimeout(()=>{viewport.current?.scrollIntoView({behavior:reduced()?'instant':'smooth',block:'start'});viewport.current?.focus({preventScroll:true});},0);}
  useEffect(()=>{
@@ -39,6 +45,7 @@ export function App(){
   function hashNavigation(){const key=location.hash.replace(/^#(?:heme\/)?/,'');
    if(['overview','structure','atomic-section','molecules'].includes(key)){window.scrollTo({top:0,behavior:reduced()?'instant':'smooth'});if(key==='molecules')setInspecting(true);return;}
    if(['chemistry','how-it-works','story'].includes(key)){scroll('chemistry');return;}
+   if(['applications','next-steps'].includes(key)){scroll(key);return;}
    if(['evidence','research'].includes(key)){scroll('evidence');return;}
    const record=document.getElementById('research-'+key);if(record){record.open=true;record.scrollIntoView({behavior:reduced()?'instant':'smooth'});}}
   window.addEventListener('hashchange',hashNavigation);if(location.hash)hashNavigation();
@@ -51,9 +58,9 @@ export function App(){
  function play(){if(!video.current)return;if(video.current.paused)video.current.play().catch(()=>setPlaying(false));else video.current.pause();}
  return <>
   <a className="skip-link" href="#evidence">Skip to research</a>
-  <header className="masthead"><a className="project-mark" href="#structure">Guanosine + hemin</a><div className="masthead-right"><a className="university" href="https://www.fairfield.edu/" target="_blank" rel="noopener"><span><b>Fairfield</b> University</span><small>Smith-Carpenter Lab</small></a><a className="record-link" href="#evidence">Research record <ArrowRightIcon/></a></div></header>
+  <header className="site-header"><div className="header-inner"><a className="lab-identity" href="#structure" aria-label="Fairfield University, Smith-Carpenter Lab. Back to the Heme overview"><span>Fairfield University</span><small>Smith-Carpenter Lab</small></a><nav className="site-navigation" aria-label="Heme research sections">{[['structure','Structure'],['chemistry','How it works'],['applications','Applications'],['evidence','Research']].map(([id,label])=><a href={'#'+id} key={id} aria-current={active===id?'location':undefined}>{label}</a>)}</nav></div></header>
   <main><section ref={hero} id="structure" className="opening" data-section="structure">
-    <div className="hero-copy"><h1>Nucleopeptide<br/>heme bundle.</h1><p className="hero-deck">Designing a hemin-binding pocket from guanosine-capped peptide helices.</p><button className="primary" onClick={inspect}>Explore the structure <ArrowRightIcon/></button></div>
+    <div className="hero-copy"><span className="hero-subject">Heme research</span><h1>A peptide pocket<br/>for hemin.</h1><p className="hero-deck">Four capped peptide helices surround an iron-containing cofactor. Can this design turn peroxide into a measurable color change?</p><div className="hero-actions"><button className="primary" onClick={inspect}>Explore the structure <ArrowRightIcon/></button><a className="hero-secondary" href="#chemistry">How sensing could work <ArrowDownIcon/></a></div></div>
     <div className={'hero-visual '+(inspecting?'inspecting':'')}><div ref={viewport} id="molecular-viewport" tabIndex="0" role="img" aria-label="Interactive original PEG2 molecular model. Arrow keys rotate, plus and minus zoom, Home resets."/>
      {load==='loading'&&<div className="model-loading" role="status">Opening the original model…</div>}
      {load==='error'&&<div className="model-error" role="alert"><img src="assets/source-model-fallback.png" alt="Atomic representation of the original PEG2 source model"/><p>The interactive model could not load. The source image is shown here.</p><button onClick={()=>setAttempt(x=>x+1)}>Try again</button><a href="assets/heme-original.pdb" download>Download the source model</a></div>}
@@ -65,15 +72,15 @@ export function App(){
       <button className="interaction-toggle" aria-pressed={interactive} onClick={toggleInteraction}>{interactive?'Finish rotating':'Rotate with touch or mouse'}</button><small>{interactive?'Drag to rotate. Finish rotating to resume normal page scrolling.':'Tap atoms to select. Page scrolling stays available.'}</small></div></div>
      <div className="color-key" aria-label="Structure colors">{[['chain-a','Helix A'],['chain-b','Helix B'],['chain-c','Helix C'],['chain-d','Helix D'],['caps','Guanosine'],['linkers','PEG2'],['cofactor','Heme + Fe']].map(([id,label])=><span className={id} key={id}>{label}</span>)}</div></div>
    </section>
-   <nav className="section-nav" aria-label="Heme research sections">{[['structure','Structure'],['chemistry','Chemistry'],['evidence','Evidence']].map(([id,label])=><a href={'#'+id} key={id} aria-current={active===id?'location':undefined}>{label}</a>)}</nav>
    <div className="academic-credit"><p>Designing a Four-Helix Nucleopeptide Bundle Capable of Hemin Binding</p><p>Christie Stevkovski, Alexander Wong, and Jillian Smith-Carpenter</p><p>Smith-Carpenter Lab <span aria-hidden="true">|</span> Fairfield University</p></div>
-   <section className="overview-section" aria-labelledby="overview-heading"><div className="overview-grid reveal"><div><span className="eyebrow">The research question</span><h2 id="overview-heading">Build the pocket.<br/>Test the chemistry.</h2></div><div><p>Can guanosine-capped peptides organize a hemin-binding bundle with a useful peroxide-dependent response?</p><p>Four peptide helices surround the cofactor in this model. PEG2 connects each peptide to its guanosine-derived cap. The next experiments ask whether the assembly binds hemin and changes its catalytic activity.</p><a className="text-link" href="#laboratory">See the next comparison <ArrowRightIcon/></a></div></div></section>
-   <section id="chemistry" className="chemistry-section" data-section="chemistry" aria-labelledby="chemistry-heading"><div className="chemistry-intro reveal"><span className="eyebrow">How it works</span><h2 id="chemistry-heading">From a binding site<br/>to an optical signal.</h2><p>The chemistry connects the design to a measurable experiment.</p></div>
+   <section className="overview-section" aria-labelledby="overview-heading"><div className="overview-grid reveal"><div><span className="eyebrow">The research question</span><h2 id="overview-heading">Does the peptide<br/>improve the reporter?</h2></div><div><p>Hemin can drive reporter chemistry on its own. The question is whether organizing it inside this peptide assembly changes its response to peroxide.</p><p>Test assembly plus hemin against free hemin, peptide-only and reagent controls. A reproducible difference would give a reason to develop the design further.</p><a className="text-link" href="#next-steps">See the experimental plan <ArrowRightIcon/></a></div></div></section>
+   <section id="chemistry" className="chemistry-section" data-section="chemistry" aria-labelledby="chemistry-heading"><div className="chemistry-intro reveal"><span className="eyebrow">How it works</span><h2 id="chemistry-heading">Follow the chemistry.</h2><p>Scroll to inspect the bundle, then follow peroxide and glucose to the optical readout. Tap a step to jump directly.</p></div>
     <ScrollAssay motionOff={motionOff}/></section>
-   <section id="evidence" className="evidence-section" data-section="evidence" aria-labelledby="evidence-heading"><header className="evidence-heading reveal"><div><span className="eyebrow">Modeling and experiment</span><h2 id="evidence-heading">Keep the evidence<br/>in view.</h2></div><p>The original model, saved simulation, historical experiments and later redesigns answer different questions. The research record keeps those versions together without treating them as the same result.</p></header>
+   <Applications/>
+   <section id="evidence" className="evidence-section" data-section="evidence" aria-labelledby="evidence-heading"><header className="evidence-heading reveal"><div><span className="eyebrow">The research record</span><h2 id="evidence-heading">The work behind<br/>the model.</h2></div><p>Explore the sequences, laboratory records and simulation analysis. Each record identifies its construct so the original design, as-run simulation and later corrections stay distinct.</p></header>
     <div className="replay-feature reveal"><div className="replay-media"><video ref={video} playsInline controls={playing} preload="none" poster="assets/motion/heme-md-atomic-poster.jpg" onPlay={()=>setPlaying(true)} onPause={()=>setPlaying(false)} onEnded={()=>setPlaying(false)} aria-label="Five-second atomic replay of authentic saved simulation frames"><source src="assets/motion/heme-md-atomic-5s.mp4" type="video/mp4"/><track kind="captions" src="assets/motion/heme-md-atomic-5s.vtt" srcLang="en" label="English" default/></video>{!playing&&<button className="replay-play" onClick={play} aria-label="Play five-second saved simulation"><PlayIcon/></button>}</div><div className="replay-caption"><span className="eyebrow">The saved simulation</span><h3>Five seconds. <br/>Actual coordinates.</h3><p>An atomic-only replay of 120 selected saved frames. The frame indices stay visible. Physical simulation time has not been verified.</p><p className="source-note">As-run trajectory, separate from the opening PEG2 model. Water and ions are omitted from this view.</p><a className="text-link" href="#modeling">Read the analysis <ArrowRightIcon/></a></div></div>
     <div className="next-experiment reveal"><span className="eyebrow">The next experiment</span><h3>Does the assembly change the response?</h3><p>Compare peroxide-dependent ABTS oxidation in hemin-containing and control assemblies. Include free hemin, peptide-only and reagent controls before assessing a peroxide-reporting assay.</p></div><div ref={records} className="research-records"/>
    </section></main>
-  <footer className="site-footer"><a href="#structure">Guanosine + hemin</a><p>Smith-Carpenter Lab<br/>Fairfield University</p><div className="footer-tools"><a href="#sources">Sources and methods <ArrowRightIcon/></a><button aria-pressed={motionOff} onClick={()=>setMotionOff(!motionOff)}>Reduce motion</button></div></footer>
+  <footer className="site-footer"><a href="#structure">Heme research</a><p>Smith-Carpenter Lab<br/>Fairfield University</p><div className="footer-tools"><a href="#sources">Sources and methods <ArrowRightIcon/></a><button aria-pressed={motionOff} onClick={()=>setMotionOff(!motionOff)}>Reduce motion</button></div></footer>
  </>;
 }

@@ -1,0 +1,136 @@
+/* Heme only: one university identity, one reading path. */
+:root{--header-height:85px}
+html{scroll-padding-top:var(--header-height)}
+body{min-width:280px}
+.site-header{position:sticky;top:0;z-index:30;background:#fafbfced;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid #dce2e880;padding-top:env(safe-area-inset-top,0px)}
+.header-inner{max-width:1600px;margin:auto;min-height:84px;padding:15px 5.6%;display:flex;align-items:center;justify-content:space-between;gap:25px}
+.lab-identity{display:flex;flex-direction:column;justify-content:center;gap:5px;min-height:44px;flex-shrink:0}
+.lab-identity>span{font-size:21px;line-height:1.15;font-weight:650;letter-spacing:-.045em;color:#a71930}
+.lab-identity>small{font-size:11px;color:#637081;line-height:1.3;letter-spacing:.015em}
+.site-navigation{display:flex;align-items:center;gap:30px}
+.site-navigation>a{position:relative;display:flex;align-items:center;justify-content:center;min-height:48px;font-size:13px;color:#626c7c;white-space:nowrap}
+.site-navigation>a:hover{color:#101318}
+.site-navigation>a[aria-current]{color:#101318;font-weight:600}
+.site-navigation>a[aria-current]:after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:#a71930}
+.opening{max-width:1600px;margin:auto;min-height:605px;overflow:clip}
+.hero-copy{padding-top:86px;padding-bottom:88px;min-height:605px;width:46%}
+.hero-subject{display:block;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#6a7481;margin-bottom:20px}
+.hero-copy h1{font-size:clamp(46px,5.1vw,78px)}
+.hero-deck{max-width:470px;font-size:clamp(18px,1.6vw,23px);line-height:1.5;letter-spacing:-.015em;margin-top:24px}
+.hero-visual{top:10px;left:41%;right:1%;height:580px}
+.hero-actions{display:flex;align-items:flex-start;flex-direction:column;gap:8px;margin-top:28px}
+.hero-actions .primary{margin:0;min-height:54px;font-size:15px;box-shadow:0 8px 20px #18212e0d}
+.hero-secondary{display:inline-flex;align-items:center;gap:12px;min-height:44px;font-size:13px;color:#526173}
+.hero-secondary svg{width:15px;height:15px}
+.hero-secondary:hover{text-decoration:underline;text-underline-offset:4px}
+.hero-scroll-note{left:8%;font-size:11px}
+.model-note{font-size:11px;right:7%;bottom:24px}
+.hero-scroll-note{bottom:24px}
+.academic-credit{border-top:1px solid #dce2e8;margin:0 5.6%;padding:25px 0 30px;color:#657183}
+.academic-credit p:first-child{max-width:780px;font-size:15px;color:#25313f;line-height:1.5;margin-bottom:7px}
+.academic-credit p{font-size:12px;line-height:1.6}
+.overview-section{padding-top:62px;padding-bottom:68px}
+.overview-grid h2{font-size:clamp(34px,3.5vw,50px)}
+.chemistry-section{padding:80px 7% 38px}
+.chemistry-intro{margin-bottom:40px;max-width:750px}
+.chemistry-intro h2{font-size:clamp(40px,4.5vw,65px)}
+.chemistry-intro>p{max-width:630px;line-height:1.6;font-size:18px;margin-top:18px}
+.scroll-assay{gap:6%;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+.assay-sticky{top:calc(var(--header-height) + 18px);border-radius:18px;background:#f4f7f9;padding-top:10px}
+.assay-stage-head{font-size:12px;padding:0 22px;min-height:46px}
+.assay-stage-head b{font-size:12px;margin-left:8px;font-weight:600;color:#334354}
+.assay-stage-head button{font-size:11px;min-width:44px;min-height:44px;color:#536579}
+.assay-scene{height:clamp(250px,calc(100svh - var(--header-height) - 270px),480px);background:#fafbfc}
+.assay-evidence-note{font-size:11px;line-height:1.5;min-height:37px;padding:10px 22px 5px}
+.assay-stage-equation,.assay-path{height:80px;min-height:80px;padding:10px 22px;align-content:center}
+.assay-path{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.assay-path.glucose-path{grid-template-columns:repeat(4,minmax(0,1fr))}
+.assay-path>span{font-size:11px;line-height:1.4;padding-top:9px;border-top:2px solid #dce3e9;color:#607185}
+.assay-path>span small{display:block;font-size:9px;letter-spacing:.07em;margin-bottom:4px;color:#7a8a9b}
+.assay-path>span.reached{border-color:#657e8f;color:#263d4f}
+.assay-path>span.signal-green.reached{border-color:#218060;color:#187253}
+.assay-step-nav{margin:0 18px;border-color:#d8e1e8}
+.assay-step-nav button{font-size:12px;min-height:48px}
+.assay-step-nav button[aria-current=step]{border-color:#a71930}
+.assay-reagent{width:150px;right:12px;bottom:10px;background:#fafbfcf7;box-shadow:0 5px 24px #2c405308}
+.reagent-viewport{height:145px}
+.assay-reagent figcaption{font-size:11px}
+.assay-reagent figcaption a{font-size:10px;min-height:44px}
+.assay-caption{min-height:65svh;padding:38px 0 65px;scroll-margin-top:calc(var(--header-height) + 25px)}
+.assay-caption h3{font-size:clamp(28px,2.8vw,41px)}
+.assay-main-caption{font-size:18px;line-height:1.65}
+.assay-detail{font-size:14px;line-height:1.7}
+.assay-view-controls{display:flex;gap:4px;align-items:center}
+.assay-view-controls>button{padding:0 10px;font-size:11px;min-height:44px;min-width:44px}
+.assay-view-controls>button[aria-pressed=true]{color:#1d3345;background:#e5ecf1}
+.assay-view-controls>button.motion-toggle{padding:0 8px}
+.assay-view-controls>button.motion-toggle svg{width:16px;height:16px}
+.evidence-section{padding-top:80px}
+#chemistry,#applications,#evidence,#next-steps,.research-record{scroll-margin-top:0}
+@media(min-width:1600px){.hero-visual{height:650px}.opening,.hero-copy{min-height:675px}}
+@media(max-width:1050px) and (min-width:701px){.site-navigation{gap:22px}.hero-visual{left:42%;right:-4%;height:540px}.hero-copy{padding-top:68px;min-height:570px}.opening{min-height:570px}.hero-deck{font-size:19px}.assay-stage-head{padding:0 14px}.assay-stage-head b{font-size:11px}.assay-view-controls>button{font-size:10px;padding:0 6px}.assay-main-caption{font-size:17px}.assay-path>span{font-size:10px}}
+@media(max-width:700px){
+ .header-inner{display:block;min-height:0;padding:12px 6% 0}
+ .lab-identity{gap:3px;align-items:flex-start;padding:0 0 7px;min-height:45px;width:fit-content}
+ .lab-identity>span{font-size:20px;letter-spacing:-.035em}
+ .lab-identity>small{font-size:10px}
+ .site-navigation{gap:0;display:grid;grid-template-columns:repeat(4,1fr)}
+ .site-navigation>a{min-height:44px;font-size:11px;justify-content:center}
+ .site-navigation>a:first-child{justify-content:flex-start}
+ .site-navigation>a:last-child{justify-content:flex-end}
+ .site-navigation>a[aria-current]:after{left:0;right:0;height:2px}
+ .opening{min-height:0}
+ .hero-copy{padding-top:28px;padding-bottom:0;width:100%;min-height:0}
+ .hero-subject{font-size:10px;margin-bottom:14px}
+ .hero-copy h1{font-size:clamp(40px,11vw,57px);line-height:1.03}
+ .hero-deck{font-size:17px;line-height:1.5;margin-top:18px;max-width:360px}
+ .hero-actions{margin-top:22px;gap:3px}
+ .hero-actions .primary{min-height:50px;font-size:14px;padding:13px 23px}
+ .hero-secondary{font-size:12px;min-height:44px}
+ .hero-visual{left:auto;right:auto;top:auto;height:340px;position:relative;margin:0 -6.8% 0;width:113.6%}
+ .model-note{font-size:10px;bottom:15px;right:7%}
+ .hero-scroll-note{font-size:10px;bottom:15px;left:7%}
+ .academic-credit{padding:23px 0 26px;margin:0 6%}
+ .academic-credit p:first-child{font-size:13px;line-height:1.5}
+ .academic-credit p{font-size:11px}
+ .overview-section{padding:42px 6% 40px}
+ .overview-grid h2{font-size:35px}
+ .chemistry-section{padding:55px 6% 12px}
+ .chemistry-intro{margin-bottom:28px}
+ .chemistry-intro h2{font-size:39px}
+ .chemistry-intro>p{font-size:16px;line-height:1.65}
+ .scroll-assay{display:block}
+ .assay-sticky{top:var(--header-height);margin:0 -6.82%;padding:0 6%;border-radius:0;background:#f4f7f9;box-shadow:0 10px 15px #fafbfc80}
+ .assay-stage-head{padding:0;min-height:44px;font-size:10px}
+ .assay-stage-head b{font-size:11px;line-height:1.3;max-width:145px;display:inline-block;vertical-align:middle}
+ .assay-view-controls{gap:0;flex:none}
+ .assay-view-controls>button{font-size:10px;padding:0 6px;min-height:44px;min-width:44px}
+ .assay-view-controls>button.motion-toggle{padding:0 7px;min-width:44px;justify-content:center}
+ .assay-scene{height:clamp(170px,28svh,255px);min-height:0;margin:0 -6.82%}
+ .assay-reagent{width:108px;right:11px;bottom:6px;border-radius:10px}
+ .reagent-viewport{height:90px}
+ .assay-reagent figcaption{font-size:10px;line-height:1.4;padding:0 8px 2px}
+ .assay-reagent figcaption a{font-size:9px;min-height:44px;line-height:1.3}
+ .assay-evidence-note{font-size:10px;min-height:34px;padding:7px 0 4px;line-height:1.4}
+ .assay-path,.assay-stage-equation{height:76px;min-height:76px;padding:6px 0 10px}
+ .assay-path{gap:7px;align-content:center}
+ .assay-path>span{font-size:10px;line-height:1.4;padding-top:7px}
+ .assay-path>span small{font-size:8px;margin-bottom:3px}
+ .assay-step-nav{margin:0;min-height:44px}
+ .assay-step-nav button{font-size:11px;min-height:44px;padding:8px 2px}
+ .assay-stage-equation{font-size:12px;line-height:1.6}
+ .assay-caption{min-height:63svh;padding:28px 0 45px}
+ .assay-caption .eyebrow{font-size:10px;line-height:1.5}
+ .assay-caption h3{font-size:29px;margin-bottom:18px}
+ .assay-main-caption{font-size:16px;line-height:1.65}
+ .assay-detail{font-size:13px;line-height:1.7}
+ .assay-source{font-size:12px}
+ .assay-chemistry-note{font-size:12px}
+ .evidence-section{padding-top:52px}
+ .site-footer{padding-top:32px}
+}
+@media(max-width:360px){.lab-identity>span{font-size:19px}.site-navigation>a{font-size:10px}.hero-copy h1{font-size:39px}.hero-deck{font-size:16px}.hero-visual{height:300px}.assay-stage-head b{font-size:10px;max-width:120px}.assay-view-controls>button{padding:0 3px;font-size:9px}.assay-path>span{font-size:9px}.assay-step-nav button{font-size:10px}}
+@media(max-height:650px){.assay-stage-head{min-height:40px}.assay-scene{height:clamp(95px,calc(100svh - var(--header-height) - 265px),240px);min-height:0}.assay-evidence-note{font-size:9px;min-height:30px;padding-top:5px}.assay-path,.assay-stage-equation{height:65px;min-height:65px}.assay-step-nav button{min-height:44px}.assay-reagent{width:94px}.reagent-viewport{height:55px}.assay-reagent figcaption{font-size:9px}.assay-reagent figcaption a{font-size:8px;min-height:44px}}
+@media(max-width:700px) and (max-height:650px){.assay-scene{height:clamp(105px,22svh,160px)}}
+@media(min-width:701px) and (max-height:500px){.assay-sticky{top:calc(var(--header-height) + 8px)}.assay-reagent{width:145px;display:grid;grid-template-columns:55px minmax(0,1fr);align-items:center;bottom:7px;right:8px}.reagent-viewport{height:78px}.assay-reagent figcaption{padding:3px 6px;font-size:9px;line-height:1.35}.assay-reagent figcaption a{font-size:8px;line-height:1.4;min-height:44px}.reagent-formula{top:25px;right:auto;width:55px;font-size:13px}}
+@media(prefers-reduced-motion:reduce){.site-header{backdrop-filter:none;-webkit-backdrop-filter:none}}

@@ -3,11 +3,11 @@ import {ArrowRightIcon,PauseIcon,PlayIcon,ReloadIcon} from '@radix-ui/react-icon
 import './scroll-assay.css';
 
 const steps=[
- {id:'assay-bundle',tab:'Bundle',label:'The original model',title:'Hemin inside four helices.',copy:'Four peptide helices surround hemin in the original PEG2 model. Guanosine-derived caps connect to the peptides through PEG2 linkers.',note:'Scroll to turn the intact model. This is a camera movement, not a simulation of assembly.',equation:'Peptide helices + PEG2 + guanosine + hemin',selection:'all',pose:{yaw:0,pitch:0,zoom:-.06}},
- {id:'assay-iron',tab:'Iron site',label:'The binding geometry',title:'Inspect the iron site.',copy:'Hemin contains iron. Two peptide histidines are explicitly connected to it in this starting model.',note:'Those imposed connections define the starting geometry. They do not prove hemin binding or catalytic activity.',equation:'Histidine · Fe · histidine',selection:'heme',pose:{yaw:17,pitch:5,zoom:.08}},
- {id:'assay-peroxide',tab:'Peroxide',label:'The peroxide assay',title:'Peroxide starts the reporter reaction.',copy:'ABTS is a reporter molecule. In heme-peroxidase chemistry, hydrogen peroxide drives its oxidation, producing a green optical signal measured by absorbance.',note:'The experiment compares the assembly with free hemin, peptide-only and reagent controls to find out whether this bundle supports that reaction.',equation:'Peroxide → ABTS oxidation → optical signal',selection:'heme',reagent:'peroxide',pose:{yaw:31,pitch:1,zoom:.01},source:['Peroxidase chemistry','https://www.nature.com/articles/s41467-017-00541-4']},
- {id:'assay-glucose',tab:'Glucose',label:'The glucose-coupled assay',title:'Glucose oxidase supplies the peroxide.',copy:'Glucose oxidase, or GOx, makes hydrogen peroxide as it oxidizes glucose. A validated heme assembly could then report that peroxide through ABTS oxidation.',note:'GOx provides glucose recognition. The heme assembly would provide the reporter reaction. Calibrate both steps together against glucose standards.',equation:'β-D-glucose + O₂ → lactone + H₂O₂',selection:'heme',reagent:'glucose',pose:{yaw:43,pitch:-5,zoom:-.06},source:['The glucose oxidase reaction','https://enzyme.expasy.org/EC/1.1.3.4']},
- {id:'assay-readout',tab:'Readout',label:'Standards and controls',title:'Measure against known standards.',copy:'Measure absorbance in a cuvette or microplate. Compare blank-corrected responses with known peroxide standards. For glucose, calibrate the complete GOx-coupled assay against glucose standards.',note:'Check reproducibility, sample interference and recovery. A calibration for this bundle has not yet been established.',equation:'Standards → corrected absorbance → sample estimate',selection:'all',pose:{yaw:58,pitch:0,zoom:-.07}}
+ {id:'assay-bundle',tab:'Bundle',label:'The peptide bundle',title:'Four helices surround hemin.',copy:'The peptides form the walls of the modeled pocket. Each peptide connects to a guanosine-derived cap through a PEG2 linker.',note:'Scroll to turn the intact structure. This camera movement explains the model; the saved simulation is below in Research.',equation:'Guanosine cap → PEG2 linker → peptide helix',selection:'all',pose:{yaw:0,pitch:0,zoom:-.04}},
+ {id:'assay-iron',tab:'Iron site',label:'The iron site',title:'The reaction centers on iron.',copy:'Hemin contains an iron atom held inside a porphyrin ring. Two peptide histidines connect to that iron in this starting model.',note:'The iron connections were imposed during modeling. Binding and catalytic activity must be measured experimentally.',equation:'Histidine · Fe · histidine',selection:'heme',pose:{yaw:24,pitch:7,zoom:.12}},
+ {id:'assay-peroxide',tab:'Peroxide',label:'Peroxide reporting',title:'Turn peroxide into a color change.',copy:'In heme-peroxidase chemistry, hydrogen peroxide drives oxidation of ABTS, a reporter molecule. Its oxidized form is green. A spectrophotometer measures that color by absorbance.',note:'Test whether this assembly supports the reaction and how it compares with free hemin and an established peroxidase. The illustration shows the assay principle, not a measured reaction in this bundle.',equation:'Peroxide → ABTS oxidation → optical signal',selection:'heme',reagent:'peroxide',pose:{yaw:43,pitch:1,zoom:.07},source:['Peroxidase chemistry','https://www.nature.com/articles/s41467-017-00541-4']},
+ {id:'assay-glucose',tab:'Glucose',label:'Glucose recognition',title:'Glucose needs a second enzyme.',copy:'Glucose oxidase, or GOx, recognizes glucose and produces peroxide as it oxidizes it. A validated heme assembly could report that peroxide through the same ABTS color reaction.',note:'This is the connection to a biosensor: GOx supplies recognition, the heme catalyst supplies the reporter chemistry, and the optical instrument supplies the readout.',equation:'β-D-glucose + O₂ → lactone + H₂O₂',selection:'heme',reagent:'glucose',pose:{yaw:65,pitch:-7,zoom:-.03},source:['The glucose oxidase reaction','https://enzyme.expasy.org/EC/1.1.3.4']},
+ {id:'assay-readout',tab:'Readout',label:'The optical readout',title:'A color becomes a measurement.',copy:'A stronger color is useful only if it tracks a known amount of analyte. Measure standards and a blank in a cuvette or microplate, then compare the corrected sample response.',note:'Peroxide standards validate the reporter first. Glucose standards test the full GOx-coupled reaction next. Neither calibration has been established for this bundle.',equation:'Known standards → corrected absorbance → concentration',selection:'all',pose:{yaw:88,pitch:0,zoom:-.05}}
 ];
 const clamp=n=>Math.min(1,Math.max(0,n));
 const interpolate=(a,b,p)=>a+(b-a)*p;
@@ -30,7 +30,7 @@ function Reagent({kind,progress,motionOff,paused}){
    if(cancelled)return;
    component.addRepresentation('ball+stick',{sele:'all',colorScheme:reagentColors,radiusScale:.75,aspectRatio:2,quality:'high'});
    await new Promise(resolve=>view.tasks.onZeroOnce(resolve));if(cancelled)return;
-   view.handleResize();view.viewerControls.center(component.getCenter());view.viewerControls.distance(component.getZoom());view.trackballControls.rotate(12,7);
+   view.handleResize();view.viewerControls.center(component.getCenter());view.viewerControls.distance(component.getZoom());view.trackballControls.rotate(12,7);view.viewerControls.zoom(-.2);
    baseline.current=view.viewerControls.getOrientation().clone();node.dataset.orientation=JSON.stringify(Array.from(baseline.current.elements));
    node.dataset.reagent=kind;node.dataset.atomCount=String(component.structure.atomCount);node.dataset.bondCount=String(component.structure.bondCount);node.dataset.cid=String(spec.cid);setStatus('ready');
   }).catch(()=>{if(!cancelled)setStatus('error');});
@@ -41,17 +41,17 @@ function Reagent({kind,progress,motionOff,paused}){
 }
 
 function SignalPath({index,progress}){
- const labels=index===3?['Glucose + O₂','Glucose oxidase','H₂O₂','Bundle + ABTS','Optical signal']:['H₂O₂','Bundle + ABTS','ABTS oxidation','Optical signal'];
+ const labels=index===3?['Glucose + GOx','Peroxide','Bundle + ABTS','Optical signal']:['Peroxide','Bundle + ABTS','ABTS oxidation','Optical signal'];
  const current=Math.min(labels.length-1,Math.floor(progress*labels.length));
- return <div className="assay-path" aria-label={index===3?'Glucose-coupled assay signal path':'Peroxide reporter signal path'}>{labels.map((label,i)=><React.Fragment key={label}><span className={(i<=current?'reached ':'')+(i===labels.length-1?'signal-green':'')}>{label}</span>{i<labels.length-1&&<ArrowRightIcon aria-hidden="true"/>}</React.Fragment>)}</div>;
+ return <div className={'assay-path '+(index===3?'glucose-path':'')} aria-label={index===3?'Glucose-coupled assay signal path':'Peroxide reporter signal path'}>{labels.map((label,i)=><span key={label} className={(i<=current?'reached ':'')+(i===labels.length-1?'signal-green':'')}><small>{String(i+1).padStart(2,'0')}</small>{label}</span>)}</div>;
 }
 
 export function ScrollAssay({motionOff=false}){
  const wrapper=useRef(null),viewport=useRef(null),engine=useRef(null),articleRefs=useRef([]),sticky=useRef(null),frame=useRef(null),latest=useRef({motionOff,paused:false});
- const [enabled,setEnabled]=useState(false),[ready,setReady]=useState(false),[failed,setFailed]=useState(false),[attempt,setAttempt]=useState(0),[index,setIndex]=useState(0),[progress,setProgress]=useState(0),[paused,setPaused]=useState(false);
+ const [enabled,setEnabled]=useState(false),[ready,setReady]=useState(false),[failed,setFailed]=useState(false),[attempt,setAttempt]=useState(0),[index,setIndex]=useState(0),[progress,setProgress]=useState(0),[paused,setPaused]=useState(false),[viewMode,setViewMode]=useState('hybrid');
  const selected=useRef(null),current=steps[index];latest.current={motionOff,paused};
  useEffect(()=>{
-  const nav=document.querySelector('.section-nav');
+  const nav=document.querySelector('.site-header');
   const measure=()=>{if(nav&&wrapper.current)wrapper.current.style.setProperty('--site-nav-height',nav.getBoundingClientRect().height+'px');};
   measure();const ro=new ResizeObserver(measure);if(nav)ro.observe(nav);return()=>ro.disconnect();
  },[]);
@@ -61,7 +61,7 @@ export function ScrollAssay({motionOff=false}){
  useEffect(()=>{
   if(!enabled)return;setFailed(false);setReady(false);
   if(!window.createResearchMolecule){setFailed(true);return;}
-  const instance=window.createResearchMolecule({project:'heme',viewport:viewport.current,backgroundColor:'#fafbfc',defaultMode:'hybrid',interactionEnabled:false,contextIntensity:.58,onReady:()=>setReady(true),onError:()=>setFailed(true)});engine.current=instance;selected.current=null;
+  const instance=window.createResearchMolecule({project:'heme',viewport:viewport.current,backgroundColor:'#fafbfc',defaultMode:viewMode,interactionEnabled:false,contextIntensity:.73,onReady:()=>setReady(true),onError:()=>setFailed(true)});engine.current=instance;selected.current=null;
   viewport.current.tabIndex=-1;viewport.current.setAttribute('aria-label','Original PEG2 structure. Camera follows scrolling; chapter buttons provide direct access.');
   return()=>{instance.destroy();engine.current=null;};
  },[enabled,attempt]);
@@ -87,10 +87,11 @@ export function ScrollAssay({motionOff=false}){
   window.addEventListener('scroll',request,{passive:true});window.addEventListener('resize',request);request();
   return()=>{window.removeEventListener('scroll',request);window.removeEventListener('resize',request);if(frame.current!==null)cancelAnimationFrame(frame.current);frame.current=null;};
  },[ready,motionOff,paused]);
- function selectStep(i){const article=articleRefs.current[i];if(!article)return;const phone=matchMedia('(max-width:700px)').matches;const offset=phone?(sticky.current?.offsetHeight||350)+(document.querySelector('.section-nav')?.getBoundingClientRect().height||49)+12:95;window.scrollTo({top:article.getBoundingClientRect().top+window.scrollY-offset,behavior:motionOff||paused||matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});}
+ function selectStep(i){const article=articleRefs.current[i];if(!article)return;const phone=matchMedia('(max-width:700px)').matches;const header=document.querySelector('.site-header')?.getBoundingClientRect().height||85;const offset=phone?(sticky.current?.offsetHeight||350)+header+12:header+30;window.scrollTo({top:article.getBoundingClientRect().top+window.scrollY-offset,behavior:motionOff||paused||matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});}
+ function changeView(value){setViewMode(value);engine.current?.setMode(value);}
  return <div ref={wrapper} className="scroll-assay" data-chapter={index} data-progress={progress}>
   <div ref={sticky} className="assay-sticky">
-   <div className="assay-stage-head"><span>{String(index+1).padStart(2,'0')} <b>{current.label}</b></span><button type="button" aria-pressed={paused} onClick={()=>setPaused(!paused)}>{paused?<PlayIcon/>:<PauseIcon/>}<span>{paused?'Resume motion':'Pause motion'}</span></button></div>
+   <div className="assay-stage-head"><span>{String(index+1).padStart(2,'0')} <b>{current.label}</b></span><div className="assay-view-controls" aria-label="Scroll structure controls"><button type="button" aria-pressed={viewMode==='hybrid'} onClick={()=>changeView('hybrid')}>Helices</button><button type="button" aria-pressed={viewMode==='atomic'} onClick={()=>changeView('atomic')}>Atoms</button><button type="button" className="motion-toggle" aria-label={paused?'Resume scroll animation':'Pause scroll animation'} aria-pressed={paused} onClick={()=>setPaused(!paused)}>{paused?<PlayIcon/>:<PauseIcon/>}</button></div></div>
    <div className="assay-scene"><div ref={viewport} className="assay-bundle-viewport" id="assay-molecular-viewport" role="img" aria-label="Original PEG2 model, with scroll-controlled camera motion"/>
     {!ready&&!failed&&<span className="assay-loading" role="status">Opening the source model…</span>}
     {failed&&<div className="assay-fallback"><img src="assets/source-model-fallback.png" alt="Original PEG2 model source image"/><button type="button" onClick={()=>setAttempt(n=>n+1)}><ReloadIcon/> Retry the model</button></div>}

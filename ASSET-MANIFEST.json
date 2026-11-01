@@ -1,6 +1,6 @@
 {
   "project": "heme",
-  "version": "20261029-heme-v8-scroll",
+  "version": "20261101-heme-v9-clarity",
   "sourceCoordinatesModified": false,
   "expectedAtoms": 1213,
   "expectedBonds": 1232,
@@ -9,6 +9,8 @@
   },
   "scrollMotion": "Camera only; not a simulated trajectory",
   "assayExamples": "Explanatory; bundle activity and calibration require experiments",
+  "applications": "Peroxide, GOx-coupled glucose, compound-screening counter-screen; cost and performance are comparisons to test",
+  "preservedPublicInputs": 30,
   "reagents": {
     "title": "Public reference reagent structures for the Heme assay explanation",
     "retrievedAtUtc": "2026-10-29T20:47:46.730648+00:00",
@@ -55,15 +57,15 @@
   "files": [
     {
       "path": "index.html",
-      "sha256": "bbea1fd7328bf565d2ba73632cc6ae7f2746574ab75853e7302332eaeee7fc12"
+      "sha256": "f9ec45efe8734ba075c17b4988cdf0894f2d0a622805f0e3f329f669a0368dd9"
     },
     {
-      "path": "assets/index-B2qc3z6C.css",
-      "sha256": "5783e58e70e47bc1e8c4b96605246815ff20b2eaf3d0607f18335c5b4ff48bb3"
+      "path": "assets/index-Dp91e_NQ.js",
+      "sha256": "98762b838d5f7d9824f53adc0e7229e746eda0814b72d41bceffe752cbb13d42"
     },
     {
-      "path": "assets/index-Bcy0MSQ3.js",
-      "sha256": "ab62beef89b3fbd3f0f2861eee80e6df74259e96b8d10f044bee8be5a596a9b6"
+      "path": "assets/index-n9fy9KoF.css",
+      "sha256": "53f95e746229e7407395b765298411a6d39c0689d691cf5289f07779fc3955bf"
     },
     {
       "path": "content.js",
@@ -115,11 +117,15 @@
     },
     {
       "path": "studio-source/src/App.jsx",
-      "sha256": "f6004600d41e4645922238eecfc14b0f61bec4f5a5a3b9b9467875f93978b93a"
+      "sha256": "ceb8ca09017bc4e115d1c064de755edef21beb5e638fde9a55fb771f93cc4aa9"
     },
     {
       "path": "studio-source/src/ScrollAssay.jsx",
-      "sha256": "b7c43d04617bd6d58280225a5b8076b7370caff745f20d44c9104b8a5b3e4ca5"
+      "sha256": "114bf27d8d1c0ea9887db7a0122f2fdb51a13c12963e9c8f633f2d09e082b85a"
+    },
+    {
+      "path": "studio-source/src/Applications.jsx",
+      "sha256": "b8af97cce4929924dcd345ffd9093f00395590997c3b6286552e9b4db04d97b5"
     },
     {
       "path": "studio-source/src/styles.css",
@@ -134,16 +140,24 @@
       "sha256": "253fb10c2bd448fd18256d73e52ca284dc8ac551826a421a60e111db8e6e7302"
     },
     {
+      "path": "studio-source/src/applications.css",
+      "sha256": "9fdc5d60c98068b0fd25de955a51aba599ff0cd123bb2bb36b71f346a018637f"
+    },
+    {
+      "path": "studio-source/src/refinements.css",
+      "sha256": "0bd9266ee701b18320e5c15b42c41be139fd405e7ea75268213c2906065c6ddc"
+    },
+    {
       "path": "studio-source/src/main.jsx",
-      "sha256": "832f752c6b6a454a26dbc4f2654f5bd633f2b103516c8c0abac648308c133a7e"
+      "sha256": "4fc1f5f5667c73c097591390ac894ac62837e89bb9d3a39a7b92195cc9537a66"
     },
     {
       "path": "README.md",
-      "sha256": "d3f91f2e0763b7d8cd8e416d903cb2b7d0d78c2370eb9a964d1d8baf1886eb4c"
+      "sha256": "506743a3a40bfb85584a6319dc62d3f07d731c9079474fd2c5bf674a8d5f049d"
     },
     {
       "path": ".github/workflows/pages.yml",
-      "sha256": "821de0547e99c7295efa04759c086dab4ec759788ae9c1c28d98d3a9e2665cf9"
+      "sha256": "bb799805d3b64d250cbc414772588d7347918843d7df27609f89304433167f64"
     }
   ]
 }
