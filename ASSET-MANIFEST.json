@@ -1,6 +1,6 @@
 {
   "project": "heme",
-  "version": "20261107-heme-clean-url",
+  "version": "20261107-heme-mobile-entry",
   "sourceCoordinatesModified": false,
   "expectedAtoms": 1213,
   "expectedBonds": 1232,
@@ -57,15 +57,15 @@
   "files": [
     {
       "path": "index.html",
-      "sha256": "86e432c27706818ae8c7c140ddff6b62bdc51ed9445d0231680256613f4628a4"
+      "sha256": "91d9b5562419a1241118da2dfd3c9941faa41880082e0ec0ac87f82fb41703dd"
     },
     {
-      "path": "assets/index-CMuVlZju.js",
-      "sha256": "e762b0299c86df2bdbffbc835009755b8a86d47109b84781fb9cdcb6cf08d1ba"
+      "path": "assets/index-CyF0dvpL.js",
+      "sha256": "ccc8f4f3f4cede6cef02a47b954680e14319895def2683d987e6a36a9046ee78"
     },
     {
-      "path": "assets/index-n9fy9KoF.css",
-      "sha256": "53f95e746229e7407395b765298411a6d39c0689d691cf5289f07779fc3955bf"
+      "path": "assets/index-DxeSLWhS.css",
+      "sha256": "4312a48f4b01bfbcc73f039becd042f14dcf1dc4481654eaedbe2ff1203173a9"
     },
     {
       "path": "content.js",
@@ -117,7 +117,7 @@
     },
     {
       "path": "studio-source/src/App.jsx",
-      "sha256": "3dda7c25dd5ff0792138dd1eb07e3f668be838e9503c4664df732e8f9eb6297e"
+      "sha256": "df2c95f98d0e8a83977f9b58bbaa82b5e7485167c7884fe5febbc195532d9b05"
     },
     {
       "path": "studio-source/src/ScrollAssay.jsx",
@@ -145,7 +145,7 @@
     },
     {
       "path": "studio-source/src/refinements.css",
-      "sha256": "0bd9266ee701b18320e5c15b42c41be139fd405e7ea75268213c2906065c6ddc"
+      "sha256": "fcfcc910a9586b74c95412f6104f0f34c2c159ab2de7f9bb2a0739dfe840468b"
     },
     {
       "path": "studio-source/src/main.jsx",
@@ -157,7 +157,7 @@
     },
     {
       "path": ".github/workflows/pages.yml",
-      "sha256": "9d964c4ab67dc93a7e0b2b1135eb30b271742f2d9fe7b788a9659514f87c5f3c"
+      "sha256": "8d7666dc1a234e00ffe54da63a1d0b9d8f3b9aebfeaad4d7e51d229e2b52761c"
     }
   ]
 }

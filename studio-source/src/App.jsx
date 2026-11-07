@@ -5,6 +5,7 @@ import {Applications} from './Applications.jsx';
 const components=[['all','Whole bundle'],['peptide','Peptide helices'],['guanosine','Guanosine caps'],['linker','PEG2 linkers'],['histidines','Histidines'],['heme','Heme + Fe']];
 export function App(){
  const viewport=useRef(null),engine=useRef(null),records=useRef(null),video=useRef(null),hero=useRef(null);
+ const exploreButton=useRef(null);
  const [load,setLoad]=useState('loading'),[attempt,setAttempt]=useState(0),[mode,setMode]=useState('hybrid');
  const [selection,setSelection]=useState({key:'all',label:'The original PEG2 model',caption:'Four capped peptide chains surround hemin. Inspect a component to see its role.'});
  const [inspecting,setInspecting]=useState(false),[interactive,setInteractive]=useState(false),[isolated,setIsolated]=useState(false);
@@ -19,6 +20,13 @@ export function App(){
  },[]);
  const scroll=id=>document.getElementById(id)?.scrollIntoView({behavior:reduced()?'instant':'smooth',block:'start'});
  function inspect(){setInspecting(true);setTimeout(()=>{viewport.current?.scrollIntoView({behavior:reduced()?'instant':'smooth',block:'start'});viewport.current?.focus({preventScroll:true});},0);}
+ function closeInspector(){
+  setInspecting(false);
+  setInteractive(false);
+  engine.current?.setInteractionEnabled?.(false);
+  exploreButton.current?.focus({preventScroll:true});
+  exploreButton.current?.scrollIntoView({behavior:reduced()?'instant':'smooth',block:'nearest'});
+ }
  useEffect(()=>{
   setLoad('loading');if(!window.createResearchMolecule){setLoad('error');return;}
   const instance=window.createResearchMolecule({project:'heme',viewport:viewport.current,backgroundColor:'#fafbfc',defaultMode:'hybrid',interactionEnabled:false,
@@ -58,14 +66,34 @@ export function App(){
  function play(){if(!video.current)return;if(video.current.paused)video.current.play().catch(()=>setPlaying(false));else video.current.pause();}
  return <>
   <a className="skip-link" href="#evidence">Skip to research</a>
-  <header className="site-header"><div className="header-inner"><a className="lab-identity" href="#structure" aria-label="Fairfield University, Smith-Carpenter Lab. Back to the Heme overview"><span>Fairfield University</span><small>Smith-Carpenter Lab</small></a><nav className="site-navigation" aria-label="Heme research sections">{[['structure','Structure'],['chemistry','How it works'],['applications','Applications'],['evidence','Research']].map(([id,label])=><a href={'#'+id} key={id} aria-current={active===id?'location':undefined}>{label}</a>)}</nav></div></header>
+  <header className="site-header">
+   <div className="header-inner">
+    <a className="lab-identity" href="#structure" aria-label="Fairfield University, Smith-Carpenter Lab. Back to the Heme overview">
+     <span>Fairfield University</span><small>Smith-Carpenter Lab</small>
+    </a>
+    <nav className="site-navigation" aria-label="Heme research sections">
+     {[["structure","Overview"],["chemistry","How it works"],["applications","Applications"],["evidence","Research"]].map(([id,label])=>
+      <a href={'#'+id} key={id} aria-current={active===id?'location':undefined}>{label}</a>
+     )}
+    </nav>
+   </div>
+  </header>
   <main><section ref={hero} id="structure" className="opening" data-section="structure">
-    <div className="hero-copy"><span className="hero-subject">Heme research</span><h1>Designing a hemin-binding bundle</h1><p className="hero-deck">Four capped peptide helices surround an iron-containing cofactor. Can this design turn peroxide into a measurable color change?</p><div className="hero-actions"><button className="primary" onClick={inspect}>Explore the structure <ArrowRightIcon/></button><a className="hero-secondary" href="#chemistry">How sensing could work <ArrowDownIcon/></a></div></div>
+    <div className="hero-copy">
+     <span className="hero-subject">Heme research</span>
+     <h1>Designing a hemin-binding bundle</h1>
+     <p className="hero-deck">This model places hemin, an iron-containing molecule, inside four peptide helices. The next experiment tests whether the bundle can help detect peroxide.</p>
+     <div className="hero-actions">
+      <button type="button" className="primary" ref={exploreButton} onClick={inspect} aria-controls="structure-inspector" aria-expanded={inspecting}>
+       Explore the 3D model <ArrowRightIcon aria-hidden="true"/>
+      </button>
+     </div>
+    </div>
     <div className={'hero-visual '+(inspecting?'inspecting':'')}><div ref={viewport} id="molecular-viewport" tabIndex="0" role="img" aria-label="Interactive original PEG2 molecular model. Arrow keys rotate, plus and minus zoom, Home resets."/>
      {load==='loading'&&<div className="model-loading" role="status">Opening the original model…</div>}
      {load==='error'&&<div className="model-error" role="alert"><img src="assets/source-model-fallback.png" alt="Atomic representation of the original PEG2 source model"/><p>The interactive model could not load. The source image is shown here.</p><button onClick={()=>setAttempt(x=>x+1)}>Try again</button><a href="assets/heme-original.pdb" download>Download the source model</a></div>}
      <div className="model-note">Original PEG2 model<small>1,213 atoms</small></div>{!inspecting&&<span className="hero-scroll-note"><ArrowDownIcon/> Scroll to turn the view</span>}</div>
-    <div className="structure-inspector" hidden={!inspecting}><div className="inspector-top"><span className="eyebrow">Inspect the original model</span><button className="icon-button" onClick={()=>{setInspecting(false);setInteractive(false);engine.current?.setInteractionEnabled?.(false);}} aria-label="Close structure controls"><Cross2Icon/></button></div>
+    <div id="structure-inspector" className="structure-inspector" hidden={!inspecting}><div className="inspector-top"><span className="eyebrow">Inspect the original model</span><button type="button" className="icon-button" onClick={closeInspector} aria-label="Close structure controls"><Cross2Icon/></button></div>
      <div className="component-controls" aria-label="Select a molecular component">{components.map(([id,label])=><button key={id} data-component={id} aria-pressed={selection.key===id} onClick={()=>choose(id)}>{label}</button>)}</div>
      <div className="inspector-grid"><div className="selection-caption" aria-live="polite"><h2>{selection.label}</h2><p>{selection.caption}</p></div><div className="molecule-controls"><div className="representation" aria-label="Structure representation">{[['hybrid','Atoms + helices'],['atomic','Atoms'],['secondary','Secondary structure']].map(([id,label])=><button data-mode={id} key={id} aria-pressed={mode===id} onClick={()=>changeMode(id)}>{label}</button>)}</div>
       <div className="camera-controls"><button className="icon-button" aria-label="Zoom out" onClick={()=>engine.current?.zoom(-.12)}><MinusIcon/></button><button className="icon-button" aria-label="Zoom in" onClick={()=>engine.current?.zoom(.12)}><PlusIcon/></button><button onClick={()=>engine.current?.reset()}><ResetIcon/> Reset</button><label><input type="checkbox" checked={isolated} disabled={selection.key==='all'} onChange={e=>{engine.current?.isolate(e.target.checked);setIsolated(e.target.checked);}}/> Isolate</label></div>
