@@ -1,6 +1,6 @@
 {
   "project": "heme",
-  "version": "20261101-heme-v9-clarity",
+  "version": "20261107-heme-clean-url",
   "sourceCoordinatesModified": false,
   "expectedAtoms": 1213,
   "expectedBonds": 1232,
@@ -10,10 +10,10 @@
   "scrollMotion": "Camera only; not a simulated trajectory",
   "assayExamples": "Explanatory; bundle activity and calibration require experiments",
   "applications": "Peroxide, GOx-coupled glucose, compound-screening counter-screen; cost and performance are comparisons to test",
-  "preservedPublicInputs": 30,
+  "preservedPublicInputs": 29,
   "reagents": {
     "title": "Public reference reagent structures for the Heme assay explanation",
-    "retrievedAtUtc": "2026-10-29T20:47:46.730648+00:00",
+    "retrievedAtUtc": "2026-10-29T16:47:46.730648-04:00",
     "purpose": "Explanatory reagent structures. These conformers are not a molecular trajectory, observed binding poses, or experimental activity results for the Fairfield bundle.",
     "records": [
       {
@@ -57,11 +57,11 @@
   "files": [
     {
       "path": "index.html",
-      "sha256": "f9ec45efe8734ba075c17b4988cdf0894f2d0a622805f0e3f329f669a0368dd9"
+      "sha256": "86e432c27706818ae8c7c140ddff6b62bdc51ed9445d0231680256613f4628a4"
     },
     {
-      "path": "assets/index-Dp91e_NQ.js",
-      "sha256": "98762b838d5f7d9824f53adc0e7229e746eda0814b72d41bceffe752cbb13d42"
+      "path": "assets/index-CMuVlZju.js",
+      "sha256": "e762b0299c86df2bdbffbc835009755b8a86d47109b84781fb9cdcb6cf08d1ba"
     },
     {
       "path": "assets/index-n9fy9KoF.css",
@@ -69,7 +69,7 @@
     },
     {
       "path": "content.js",
-      "sha256": "9880a97615df7a94a03414d6dd3bf4dc24a6253e458b18c2a7888f8ac2a3824f"
+      "sha256": "85c9eda806eb0f0d7039edf7ad1fae6e1c7490e3a10787dcddd3fb6bd8518b2f"
     },
     {
       "path": "application-data.js",
@@ -117,7 +117,7 @@
     },
     {
       "path": "studio-source/src/App.jsx",
-      "sha256": "ceb8ca09017bc4e115d1c064de755edef21beb5e638fde9a55fb771f93cc4aa9"
+      "sha256": "3dda7c25dd5ff0792138dd1eb07e3f668be838e9503c4664df732e8f9eb6297e"
     },
     {
       "path": "studio-source/src/ScrollAssay.jsx",
@@ -157,7 +157,7 @@
     },
     {
       "path": ".github/workflows/pages.yml",
-      "sha256": "bb799805d3b64d250cbc414772588d7347918843d7df27609f89304433167f64"
+      "sha256": "9d964c4ab67dc93a7e0b2b1135eb30b271742f2d9fe7b788a9659514f87c5f3c"
     }
   ]
 }

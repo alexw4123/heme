@@ -91,7 +91,7 @@ window.RESEARCH_CONTENT = {
         "caption": "Original PEG2 molecular model · four constructed chains with hemin. Select a part to read its role while the full structure stays visible.",
         "atomCount": 1213,
         "bondCount": 1232,
-        "file": "https://alexw4123.github.io/guanosine-heme-cinematic-viewer/assets/heme-original.pdb",
+        "file": "https://alexw4123.github.io/heme/assets/heme-original.pdb",
         "sha256": "e3eccb1cbe10a18a0bd633aaf076a7cd1fd2beeedccba0fd73a2a7695b238b4c"
       },
       "components": [
@@ -528,7 +528,7 @@ window.RESEARCH_CONTENT = {
               "access": "Existing notebook permissions retained"
             }
           ],
-          "figureUrl": "https://alexw4123.github.io/guanosine-heme-cinematic-viewer/assets/heme-poster.jpg"
+          "figureUrl": "https://alexw4123.github.io/heme/assets/heme-poster.jpg"
         }
       ],
       "sources": [
@@ -602,7 +602,7 @@ window.RESEARCH_CONTENT = {
       ],
       "sourceNote": "Project documents retain their existing permissions and may require the lab account.",
       "figure": {
-        "url": "https://alexw4123.github.io/guanosine-heme-cinematic-viewer/assets/heme-poster.jpg",
+        "url": "https://alexw4123.github.io/heme/assets/heme-poster.jpg",
         "caption": "Historical Fairfield research poster · experimental samples and characterization, separate from the computational PEG2 model."
       },
       "summary": "Hemin is an iron-containing cofactor. The design places it inside four guanosine-capped peptide helices. PEG2 joins each cap to its peptide, and histidines face the iron. The experiments ask whether the assembly binds hemin and changes its catalytic activity.",
