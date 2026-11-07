@@ -15,7 +15,12 @@ body{min-width:280px}
 .opening{max-width:1600px;margin:auto;min-height:605px;overflow:clip}
 .hero-copy{padding-top:86px;padding-bottom:88px;min-height:605px;width:46%}
 .hero-subject{display:block;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#6a7481;margin-bottom:20px}
-.hero-copy h1{font-size:clamp(46px,5.1vw,78px)}
+.hero-copy h1{
+  font-size:clamp(34px,4vw,62px);
+  line-height:1.06;
+  letter-spacing:-.045em;
+  text-wrap:balance;
+}
 .hero-deck{max-width:470px;font-size:clamp(18px,1.6vw,23px);line-height:1.5;letter-spacing:-.015em;margin-top:24px}
 .hero-visual{top:10px;left:41%;right:1%;height:580px}
 .hero-actions{margin-top:28px}
@@ -79,7 +84,11 @@ body{min-width:280px}
  .opening{min-height:0}
  .hero-copy{padding-top:24px;padding-bottom:0;width:100%;min-height:0}
  .hero-subject{font-size:10px;margin-bottom:10px}
- .hero-copy h1{font-size:clamp(36px,10vw,53px);line-height:1.04}
+ .hero-copy h1{
+   font-size:clamp(23px,7vw,31px);
+   line-height:1.1;
+   letter-spacing:-.035em;
+ }
  .hero-deck{font-size:17px;line-height:1.5;margin-top:16px;max-width:360px}
  .hero-actions{margin-top:20px}
  .hero-actions .primary{min-height:50px;font-size:14px;padding:13px 23px}

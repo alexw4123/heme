@@ -1,6 +1,6 @@
 {
   "project": "heme",
-  "version": "20261107-heme-mobile-entry",
+  "version": "20261107-heme-study-title",
   "sourceCoordinatesModified": false,
   "expectedAtoms": 1213,
   "expectedBonds": 1232,
@@ -57,15 +57,15 @@
   "files": [
     {
       "path": "index.html",
-      "sha256": "91d9b5562419a1241118da2dfd3c9941faa41880082e0ec0ac87f82fb41703dd"
+      "sha256": "286c98f0bc041eb50f69a089c5f051411bd20c86b557fb7df68882b428648576"
     },
     {
-      "path": "assets/index-CyF0dvpL.js",
-      "sha256": "ccc8f4f3f4cede6cef02a47b954680e14319895def2683d987e6a36a9046ee78"
+      "path": "assets/index-Bcvt1oxJ.js",
+      "sha256": "2247a28cc353d364f47dfe3fbac982c77bf7f4588d2a71704c92b6e33d1bd6ba"
     },
     {
-      "path": "assets/index-DxeSLWhS.css",
-      "sha256": "4312a48f4b01bfbcc73f039becd042f14dcf1dc4481654eaedbe2ff1203173a9"
+      "path": "assets/index-yRi4dj4n.css",
+      "sha256": "e87476763f294bcc8330abe7d6b3c0739a7505fd6b5fd4ce6a0473caeba5d022"
     },
     {
       "path": "content.js",
@@ -117,7 +117,7 @@
     },
     {
       "path": "studio-source/src/App.jsx",
-      "sha256": "df2c95f98d0e8a83977f9b58bbaa82b5e7485167c7884fe5febbc195532d9b05"
+      "sha256": "bfb28998a1511d0f715bc5404a3987caad15306baa07bc87b4fd9e11344e72ef"
     },
     {
       "path": "studio-source/src/ScrollAssay.jsx",
@@ -145,7 +145,7 @@
     },
     {
       "path": "studio-source/src/refinements.css",
-      "sha256": "fcfcc910a9586b74c95412f6104f0f34c2c159ab2de7f9bb2a0739dfe840468b"
+      "sha256": "6c5db240aac601a3d97f6f3494e501b8175b47abc0ca5542f8f6cdacb0411d67"
     },
     {
       "path": "studio-source/src/main.jsx",
@@ -157,7 +157,7 @@
     },
     {
       "path": ".github/workflows/pages.yml",
-      "sha256": "8d7666dc1a234e00ffe54da63a1d0b9d8f3b9aebfeaad4d7e51d229e2b52761c"
+      "sha256": "49b99eec228fa932a069234bf83814eed67c2f8d6b44672e360ccc209923d10f"
     }
   ]
 }

@@ -81,7 +81,7 @@ export function App(){
   <main><section ref={hero} id="structure" className="opening" data-section="structure">
     <div className="hero-copy">
      <span className="hero-subject">Heme research</span>
-     <h1>Designing a hemin-binding bundle</h1>
+     <h1>Designing a Four-Helix Nucleopeptide Bundle Capable of Hemin Binding</h1>
      <p className="hero-deck">This model places hemin, an iron-containing molecule, inside four peptide helices. The next experiment tests whether the bundle can help detect peroxide.</p>
      <div className="hero-actions">
       <button type="button" className="primary" ref={exploreButton} onClick={inspect} aria-controls="structure-inspector" aria-expanded={inspecting}>
@@ -100,7 +100,10 @@ export function App(){
       <button className="interaction-toggle" aria-pressed={interactive} onClick={toggleInteraction}>{interactive?'Finish rotating':'Rotate with touch or mouse'}</button><small>{interactive?'Drag to rotate. Finish rotating to resume normal page scrolling.':'Tap atoms to select. Page scrolling stays available.'}</small></div></div>
      <div className="color-key" aria-label="Structure colors">{[['chain-a','Helix A'],['chain-b','Helix B'],['chain-c','Helix C'],['chain-d','Helix D'],['caps','Guanosine'],['linkers','PEG2'],['cofactor','Heme + Fe']].map(([id,label])=><span className={id} key={id}>{label}</span>)}</div></div>
    </section>
-   <div className="academic-credit"><p>Designing a Four-Helix Nucleopeptide Bundle Capable of Hemin Binding</p><p>Christie Stevkovski, Alexander Wong, and Jillian Smith-Carpenter</p><p>Smith-Carpenter Lab <span aria-hidden="true">|</span> Fairfield University</p></div>
+   <div className="academic-credit">
+    <p>Christie Stevkovski, Alexander Wong, and Jillian Smith-Carpenter</p>
+    <p>Smith-Carpenter Lab <span aria-hidden="true">|</span> Fairfield University</p>
+   </div>
    <section className="overview-section" aria-labelledby="overview-heading"><div className="overview-grid reveal"><div><span className="eyebrow">The research question</span><h2 id="overview-heading">Does the peptide<br/>improve the reporter?</h2></div><div><p>Hemin can drive reporter chemistry on its own. The question is whether organizing it inside this peptide assembly changes its response to peroxide.</p><p>Test assembly plus hemin against free hemin, peptide-only and reagent controls. A reproducible difference would give a reason to develop the design further.</p><a className="text-link" href="#next-steps">See the experimental plan <ArrowRightIcon/></a></div></div></section>
    <section id="chemistry" className="chemistry-section" data-section="chemistry" aria-labelledby="chemistry-heading"><div className="chemistry-intro reveal"><span className="eyebrow">How it works</span><h2 id="chemistry-heading">Follow the chemistry.</h2><p>Scroll to inspect the bundle, then follow peroxide and glucose to the optical readout. Tap a step to jump directly.</p></div>
     <ScrollAssay motionOff={motionOff}/></section>
